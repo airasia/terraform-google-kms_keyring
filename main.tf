@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "google" {
-  version = ">= 3.13.0" # see https://github.com/terraform-providers/terraform-provider-google/releases
+  version = ">= 3.36.0" # see https://github.com/terraform-providers/terraform-provider-google/releases
 }
 
 data "google_client_config" "google_client" {}
