@@ -28,28 +28,28 @@ variable "kms_location" {
 }
 
 variable "symmetric_keys" {
-  description = "A list of objects defining properties of symmetric encryption-decryption keys."
+  description = "A list of objects defining properties of symmetric encryption-decryption keys. Specify \"rotation_period\" in number of seconds including the trailing 's'. For example \"7776000s\" = \"90 days\"."
   type = list(object({
     key_name        = string
-    rotation_period = string # specify in number of seconds including the trailing 's'. For example "7776000s" = "90 days"
+    rotation_period = string
   }))
   default = []
 }
 
 variable "asymmetric_keys" {
-  description = "A list of objects defining properties of asymmetric encryption-decryption keys."
+  description = "A list of objects defining properties of asymmetric encryption-decryption keys. Recommended \"algorithm\" = \"RSA_DECRYPT_OAEP_3072_SHA256\" - see https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations."
   type = list(object({
     key_name  = string
-    algorithm = string # Recommended "RSA_DECRYPT_OAEP_3072_SHA256". See https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations
+    algorithm = string
   }))
   default = []
 }
 
 variable "signature_keys" {
-  description = "A list of objects defining properties of asymmetric signature keys."
+  description = "A list of objects defining properties of asymmetric signature keys. Recommended \"algorithm\" = \"EC_SIGN_P256_SHA256\" - see https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations."
   type = list(object({
     key_name  = string
-    algorithm = string # Recommended "EC_SIGN_P256_SHA256". See https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations
+    algorithm = string
   }))
   default = []
 }
