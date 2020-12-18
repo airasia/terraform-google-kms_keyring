@@ -15,7 +15,7 @@ output "key_ring_link" {
   value       = google_kms_key_ring.key_ring.self_link
 }
 
-output "symmetric_key_links" {
+output "symmetric_key_self_links" {
   description = "Map of references (self_links) to KMS Symmetric Encryption-Decryption Keys."
   value = {
     for symmetric_key in google_kms_crypto_key.symmetric_keys :
@@ -23,7 +23,7 @@ output "symmetric_key_links" {
   }
 }
 
-output "asymmetric_key_links" {
+output "asymmetric_key_self_links" {
   description = "Map of references (self_links) to KMS Asymmetric Encryption-Decryption Keys."
   value = {
     for asymmetric_key in google_kms_crypto_key.asymmetric_keys :
@@ -31,7 +31,7 @@ output "asymmetric_key_links" {
   }
 }
 
-output "signature_key_links" {
+output "signature_key_self_links" {
   description = "Map of references (self_links) to KMS Asymmetric Signature Keys."
   value = {
     for signature_key in google_kms_crypto_key.signature_keys :
