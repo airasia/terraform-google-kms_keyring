@@ -18,13 +18,13 @@ This upgrade addresses [The problem of "shifting all items" in an array](https:/
       4. Thus, the KMS keys & keyrings in GCP will not be destroyed/recreated following this guideline.
     4. After setting the above to `false`, run `terraform plan` again.
       1. This time the plan will pass gracefully showing an equal number of `google_kms_crypto_key` resources will be destroyed and recreated under new named indexes.
-      2. We want to avoid any kind of destruction and recreation.
+      2. We want to avoid any kind of destruction and/or recreation.
 
 4. Move the terraform state positions:
    1. Notice the following that the plan says:
-      1. Your **symmetric_keys** will be destroyed (let's say `SymmX`) and new **symmetric_keys** will be created (let's say `SymmY`).
-      2. Your **asymmetric_keys** will be destroyed (let's say `AsymmX`) and new **asymmetric_keys** will be created (let's say `AsymmY`).
-      3. Your **signature_keys** will be destroyed (let's say `SignX`) and new **signature_keys** will be created (let's say `SignY`).
+      1. Your **existing** symmetric_keys (let's say `SymmX`) will be destroyed and **new** symmetric_keys (let's say `SymmY`) will be created.
+      2. Your **existing** asymmetric_keys (let's say `AsymmX`) will be destroyed and **new** asymmetric_keys (let's say `AsymmY`) will be created.
+      3. Your **existing** signature_keys (let's say `SignX`) will be destroyed and **new** signature_keys (let's say `SignY`) will be created.
    2. P.S. if you happen to have multiple keys, then the plan will show these destructions and recreations multiple times - you will need to move the states for EACH of the respective resources one-by-one.
    3. Pay attention to the array indexes:
       1. The `*X` resources (the ones to be destroyed) start with array index `[0]` - although it may not show the `[0]` in the plan.
@@ -63,7 +63,7 @@ Successfully moved 1 object(s).
 
 5. Now run `terraform plan` again
    1. The plan should now show that no changes required
-   2. This confirms that you have successfully move all your resources' states to their new position as required by `v2.1.0`.
+   2. This confirms that you have successfully moved all your resources' states to their new position as required by `v2.1.0`.
    3. You should never have to run `terraform apply` for this upgrade exercise.
 
 5. DONE
