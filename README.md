@@ -1,5 +1,15 @@
 Terraform module for KMS Key Rings and KMS Keys in GCP
 
+# Upgrade guide v2.2.0 to v2.3.0
+
+This upgrade addresses [changes in upgrading to Terraform Google Cloud Platform provider 4.0.0](https://github.com/hashicorp/terraform-provider-google/pull/10424/files).
+
+   1. Usage of `self_link` for `google_kms_key_ring` resource is no longer supported. Hence, `output` of this module has been changed as follows:
+      1. `key_ring_link` is now removed in favor of `key_ring`.
+      2. `symmetric_key_self_links` is now removed in favor of `symmetric_keys`.
+      3. `asymmetric_key_self_links` is now removed in favor of `asymmetric_keys`.
+      4. `signature_key_self_links` is now removed in favor of `signature_keys`.
+
 # Upgrade guide v2.0.0 to v2.1.0
 
 This upgrade addresses [The problem of "shifting all items" in an array](https://github.com/airasia/terraform-google-external_access/wiki/The-problem-of-%22shifting-all-items%22-in-an-array).

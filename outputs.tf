@@ -10,31 +10,31 @@ output "usage_IAM_roles" {
   ]
 }
 
-output "key_ring_link" {
-  description = "A reference (self_link) to the KMS Key Ring."
-  value       = google_kms_key_ring.key_ring.self_link
+output "key_ring" {
+  description = "A reference (ID) to the KMS Key Ring."
+  value       = google_kms_key_ring.key_ring.id
 }
 
-output "symmetric_key_self_links" {
-  description = "Map of references (self_links) to KMS Symmetric Encryption-Decryption Keys."
+output "symmetric_keys" {
+  description = "Map of references (IDs) to KMS Symmetric Encryption-Decryption Keys."
   value = {
     for symmetric_key in google_kms_crypto_key.symmetric_keys :
-    symmetric_key.name => symmetric_key.self_link
+    symmetric_key.name => symmetric_key.id
   }
 }
 
-output "asymmetric_key_self_links" {
-  description = "Map of references (self_links) to KMS Asymmetric Encryption-Decryption Keys."
+output "asymmetric_keys" {
+  description = "Map of references (IDs) to KMS Asymmetric Encryption-Decryption Keys."
   value = {
     for asymmetric_key in google_kms_crypto_key.asymmetric_keys :
-    asymmetric_key.name => asymmetric_key.self_link
+    asymmetric_key.name => asymmetric_key.id
   }
 }
 
-output "signature_key_self_links" {
-  description = "Map of references (self_links) to KMS Asymmetric Signature Keys."
+output "signature_keys" {
+  description = "Map of references (IDs) to KMS Asymmetric Signature Keys."
   value = {
     for signature_key in google_kms_crypto_key.signature_keys :
-    signature_key.name => signature_key.self_link
+    signature_key.name => signature_key.id
   }
 }
