@@ -19,7 +19,7 @@ resource "google_kms_crypto_key" "symmetric_keys" {
   # see https://cloud.google.com/kms/docs/encrypt-decrypt
   for_each        = { for obj in var.symmetric_keys : obj.key_name => obj }
   name            = "sym-${each.value.key_name}-${var.name_suffix}"
-  key_ring        = google_kms_key_ring.key_ring.self_link
+  key_ring        = google_kms_key_ring.key_ring.id
   purpose         = "ENCRYPT_DECRYPT"
   rotation_period = each.value.rotation_period
   version_template {
@@ -33,7 +33,7 @@ resource "google_kms_crypto_key" "asymmetric_keys" {
   # see https://cloud.google.com/kms/docs/encrypt-decrypt-rsa
   for_each = { for obj in var.asymmetric_keys : obj.key_name => obj }
   name     = "asym-${each.value.key_name}-${var.name_suffix}"
-  key_ring = google_kms_key_ring.key_ring.self_link
+  key_ring = google_kms_key_ring.key_ring.id
   purpose  = "ASYMMETRIC_DECRYPT"
   version_template {
     algorithm        = each.value.algorithm
@@ -46,7 +46,7 @@ resource "google_kms_crypto_key" "signature_keys" {
   # see https://cloud.google.com/kms/docs/create-validate-signatures
   for_each = { for obj in var.signature_keys : obj.key_name => obj }
   name     = "sig-${each.value.key_name}-${var.name_suffix}"
-  key_ring = google_kms_key_ring.key_ring.self_link
+  key_ring = google_kms_key_ring.key_ring.id
   purpose  = "ASYMMETRIC_SIGN"
   version_template {
     algorithm        = each.value.algorithm
